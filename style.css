@@ -94,14 +94,16 @@ input:focus {
 }
 
 .task-list {
-    display: none;
+    display: flex;
+    flex-direction: column;
 }
 
-.task-list.active {
+li.active {
     margin: auto;
     margin-top: 1.5em;
     margin-bottom: 2em;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     flex-direction: column;
     background-color: var(--cards);
@@ -110,8 +112,9 @@ input:focus {
     padding-left: 0.5em;
 }
 
-ul {
+li {
     display: flex;
+    flex-direction: column;
     color: var(--paragraph);
 }
 
