@@ -66,13 +66,21 @@ function createTask() {
     span.classList.add("close");
     span.appendChild(span_txt);
 
+    /* close span */
+
+    span.addEventListener("click", () => {
+        span.parentElement.style.display = "none";
+      });
+
     task_div.addEventListener("dragstart", dragStart);
     task_div.addEventListener("dragend", dragEnd);
-    
+
     task_div.appendChild(span);
     columnAdd.appendChild(task_div);
 
 }
+
+/* close task */
 
 close_btns.forEach((btn) => {
   btn.addEventListener("click", () => {
