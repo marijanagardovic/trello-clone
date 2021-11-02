@@ -1,19 +1,43 @@
-let input = document.querySelector('#add-one');
-let iconAdd = document.querySelector('#task-submit');
-let addTask = document.querySelector('.task-list');
-let tasks = document.querySelector('.tasks');
-let li = document.createElement('li');
+const tasks = document.querySelectorAll('.tasks');
+const columns = document.querySelectorAll('.columns');
+let draggableTask = null;
 
-//adding cards
+tasks.forEach((task) => {
+    task.addEventListener("dragstart", dragStart);
+    task.addEventListener("dragend", dragEnd);
+});
 
-iconAdd.addEventListener('click', () => {
-    if(input.value == '') {
-        input.value = 'Add a card';
-    }
-    li.appendChild(document.createTextNode(input.value));
-    addTask.appendChild(li);
-    
-/*     addTask.classList.add('active');
-    addTask.innerHTML = input.value; */
+function dragStart() {
+    draggableTask = this;
+}
+
+function dragEnd () {
+    draggableTask = null;
+}
+
+
+columns.forEach((column) =>{
+    column.addEventListener('dragover', dragOver);
+    column.addEventListener('dragenter', dragEnter);
+    column.addEventListener('dragleave', dragLeave);
+    column.addEventListener('drop', dragDrop);
 })
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function dragEnter() {
+
+}
+
+function dragLeave() {
+
+}
+
+function dragDrop() {
+    this.appendChild(draggableTask);
+}
+
+
 
