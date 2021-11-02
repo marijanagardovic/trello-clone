@@ -28,14 +28,15 @@ function dragOver(e) {
 }
 
 function dragEnter() {
-
+    this.style.border = "2px solid #426f85";
 }
 
 function dragLeave() {
-
+    this.style.border = "none";
 }
 
 function dragDrop() {
+    this.style.border = "none";
     this.appendChild(draggableTask);
 }
 
