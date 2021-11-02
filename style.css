@@ -9,11 +9,13 @@
     --cards-hover: #dbe9e7;
     --paragraph: #335768;
     --plus-icon: #284755;
+    --new-card-hover: #426f85;
 }
 
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -37,6 +39,7 @@ body {
     background-color: var(--column-color);
     max-width: 500px;
     height: 100%;
+    border-radius: 3px;
 }
 
 .add-card {
@@ -49,6 +52,7 @@ body {
     height: 50px;
     align-items: center;
     cursor: pointer;
+    border-radius: 3px;
 }
 
 .add-card:hover, input:hover {
@@ -87,34 +91,47 @@ input {
     width: 90%;
     color: var(--paragraph);
     font-weight: 500;
+    width: 100%;
 }
 
 input:focus {
     outline: none;
+    border: none;
 }
 
-.task-list {
-    display: flex;
-    flex-direction: column;
-}
-
-li.active {
+.tasks {
     margin: auto;
-    margin-top: 1.5em;
+    margin-top: 1em;
     margin-bottom: 2em;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
     background-color: var(--cards);
     height: 50px;
     width: 90%;
-    padding-left: 0.5em;
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, 
+    rgba(15, 15, 15, 0.1) 0px 2px 4px;
+    border-radius: 3px;
+    padding: 0.8rem 1rem;
+    color: var(--paragraph);
+    font-weight: 500;
+    cursor: pointer;
 }
 
-li {
+.close {
+    font-size: 1.5rem;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--column-color);
+}
+
+.close:hover {
+    cursor: pointer;
     color: var(--paragraph);
+}
+
+.tasks:hover {
+    background-color: var(--new-card-hover);
+    color: var(--background-color);
 }
 
