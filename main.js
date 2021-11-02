@@ -1,6 +1,12 @@
 const tasks = document.querySelectorAll('.tasks');
 const columns = document.querySelectorAll('.columns');
 let draggableTask = null;
+const submit = document.querySelector('#task-submit');
+const columnAdd = document.querySelector('#column_add');
+const close_btns = document.querySelectorAll(".close");
+
+
+//create drag and drop functions
 
 tasks.forEach((task) => {
     task.addEventListener("dragstart", dragStart);
@@ -40,5 +46,36 @@ function dragDrop() {
     this.appendChild(draggableTask);
 }
 
+//create new task
 
+submit.addEventListener('click', createTask);
 
+function createTask() {
+    const task_div = document.createElement("div");
+    const addTask = document.querySelector('#add-task').value;
+    const txt = document.createTextNode(addTask);
+    task_div.appendChild(txt);
+
+    task_div.classList.add("tasks");
+    task_div.setAttribute("draggable", "true");
+
+    /*create span */
+
+    const span = document.createElement("span");
+    const span_txt = document.createTextNode("\u00D7");
+    span.classList.add("close");
+    span.appendChild(span_txt);
+
+    task_div.addEventListener("dragstart", dragStart);
+    task_div.addEventListener("dragend", dragEnd);
+    
+    task_div.appendChild(span);
+    columnAdd.appendChild(task_div);
+
+}
+
+close_btns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    btn.parentElement.style.display = "none";
+  });
+});
