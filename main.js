@@ -4,6 +4,10 @@ let draggableTask = null;
 const submit = document.querySelector('#task-submit');
 const columnAdd = document.querySelector('#column_add');
 const close_btns = document.querySelectorAll(".close");
+const backlog = document.querySelector('.backlog');
+const inProgress = document.querySelector('.inProgress');
+const done = document.querySelector('.done');
+const hold = document.querySelector('.hold');
 
 
 //create drag and drop functions
@@ -12,6 +16,7 @@ tasks.forEach((task) => {
     task.addEventListener("dragstart", dragStart);
     task.addEventListener("dragend", dragEnd);
 });
+
 
 function dragStart() {
     draggableTask = this;
@@ -79,8 +84,18 @@ function createTask() {
     task_div.appendChild(span);
     columnAdd.appendChild(task_div);
 
-}
+    /* local storage doesn't work properly */
+    const taskArray = [];
+    tasks.forEach((task) => {
+        taskArray.push({
+        name: "task",
+        column: "backlog"
+        })
+    })
 
+    localStorage.setItem("taskArray",JSON.stringify(taskArray));
+
+}
 
 /* close task */
 
@@ -89,6 +104,3 @@ close_btns.forEach((btn) => {
     btn.parentElement.style.display = "none";
   });
 });
-
-localStorage.removeItem("name");
-console.log(window.localStorage);
