@@ -79,7 +79,7 @@ function createTask() {
         task_div.addEventListener("dragend", dragEnd);
     
 
-        localStorage.setItem(columnAdd, task_div);
+        localStorage.setItem(task_div, addTask);
         location.reload();
 
         task_div.appendChild(span);
