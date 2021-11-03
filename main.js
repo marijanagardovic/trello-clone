@@ -4,6 +4,7 @@ let draggableTask = null;
 const submit = document.querySelector('#task-submit');
 const columnAdd = document.querySelector('#column_add');
 const close_btns = document.querySelectorAll(".close");
+const addTask = document.querySelector('#add-task');
 
 
 //create drag and drop functions
@@ -53,32 +54,39 @@ submit.addEventListener('click', createTask);
 function createTask() {
     const task_div = document.createElement("div");
     const addTask = document.querySelector('#add-task').value;
-    const txt = document.createTextNode(addTask);
-    task_div.appendChild(txt);
 
-    task_div.classList.add("tasks");
-    task_div.setAttribute("draggable", "true");
+    if (addTask) {
+        const txt = document.createTextNode(addTask);
+        task_div.appendChild(txt);
+    
+        task_div.classList.add("tasks");
+        task_div.setAttribute("draggable", "true");
+    
+        /*create span */
+    
+        const span = document.createElement("span");
+        const span_txt = document.createTextNode("\u00D7");
+        span.classList.add("close");
+        span.appendChild(span_txt);
+    
+        /* close span */
+    
+        span.addEventListener("click", () => {
+            span.parentElement.style.display = "none";
+          });
+    
+        task_div.addEventListener("dragstart", dragStart);
+        task_div.addEventListener("dragend", dragEnd);
+    
 
-    /*create span */
+        localStorage.setItem(columnAdd, task_div);
+        location.reload();
 
-    const span = document.createElement("span");
-    const span_txt = document.createTextNode("\u00D7");
-    span.classList.add("close");
-    span.appendChild(span_txt);
-
-    /* close span */
-
-    span.addEventListener("click", () => {
-        span.parentElement.style.display = "none";
-      });
-
-    task_div.addEventListener("dragstart", dragStart);
-    task_div.addEventListener("dragend", dragEnd);
-
-    task_div.appendChild(span);
-    columnAdd.appendChild(task_div);
-
+        task_div.appendChild(span);
+        columnAdd.appendChild(task_div);
+    }
 }
+
 
 /* close task */
 
@@ -87,3 +95,6 @@ close_btns.forEach((btn) => {
     btn.parentElement.style.display = "none";
   });
 });
+
+localStorage.removeItem("name");
+console.log(window.localStorage);
