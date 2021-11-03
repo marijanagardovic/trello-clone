@@ -135,3 +135,17 @@ input:focus {
     color: var(--background-color);
 }
 
+@media(max-width: 1011px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows:  1fr 1fr;
+    }
+}
+
+@media(max-width: 615px) {
+    .container {
+        width: 95%;
+        grid-template-columns: 1fr;
+        grid-template-rows:  1fr 1fr 1fr 1fr;
+    }
+}
