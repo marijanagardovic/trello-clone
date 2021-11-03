@@ -4,7 +4,6 @@ let draggableTask = null;
 const submit = document.querySelector('#task-submit');
 const columnAdd = document.querySelector('#column_add');
 const close_btns = document.querySelectorAll(".close");
-const addTask = document.querySelector('#add-task');
 
 
 //create drag and drop functions
@@ -55,36 +54,31 @@ function createTask() {
     const task_div = document.createElement("div");
     const addTask = document.querySelector('#add-task').value;
 
-    if (addTask) {
-        const txt = document.createTextNode(addTask);
-        task_div.appendChild(txt);
-    
-        task_div.classList.add("tasks");
-        task_div.setAttribute("draggable", "true");
-    
-        /*create span */
-    
-        const span = document.createElement("span");
-        const span_txt = document.createTextNode("\u00D7");
-        span.classList.add("close");
-        span.appendChild(span_txt);
-    
-        /* close span */
-    
-        span.addEventListener("click", () => {
-            span.parentElement.style.display = "none";
-          });
-    
-        task_div.addEventListener("dragstart", dragStart);
-        task_div.addEventListener("dragend", dragEnd);
-    
+    const txt = document.createTextNode(addTask);
+    task_div.appendChild(txt);
 
-        localStorage.setItem(task_div, addTask);
-        location.reload();
+    task_div.classList.add("tasks");
+    task_div.setAttribute("draggable", "true");
 
-        task_div.appendChild(span);
-        columnAdd.appendChild(task_div);
-    }
+    /*create span */
+
+    const span = document.createElement("span");
+    const span_txt = document.createTextNode("\u00D7");
+    span.classList.add("close");
+    span.appendChild(span_txt);
+
+    /* close span */
+
+    span.addEventListener("click", () => {
+        span.parentElement.style.display = "none";
+      });
+
+    task_div.addEventListener("dragstart", dragStart);
+    task_div.addEventListener("dragend", dragEnd);
+
+    task_div.appendChild(span);
+    columnAdd.appendChild(task_div);
+
 }
 
 
