@@ -20,7 +20,10 @@
 
 body {
     font-family: var(--ffamily);
-    background-color: var(--background-color);
+    background: url("assets/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .container {
