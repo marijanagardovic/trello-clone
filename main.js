@@ -56,6 +56,7 @@ function dragDrop() {
 submit.addEventListener('click', createTask);
 
 function createTask() {
+    
     const task_div = document.createElement("div");
     const addTask = document.querySelector('#add-task').value;
 
@@ -83,6 +84,8 @@ function createTask() {
 
     task_div.appendChild(span);
     columnAdd.appendChild(task_div);
+
+    
 
     /* local storage doesn't work properly */
     const taskArray = [];
