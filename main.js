@@ -4,51 +4,45 @@ let draggableTask = null;
 const submit = document.querySelector('#task-submit');
 const columnAdd = document.querySelector('#column_add');
 const close_btns = document.querySelectorAll(".close");
-const backlog = document.querySelector('.backlog');
-const inProgress = document.querySelector('.inProgress');
-const done = document.querySelector('.done');
-const hold = document.querySelector('.hold');
+
 
 
 //create drag and drop functions
-
-tasks.forEach((task) => {
-    task.addEventListener("dragstart", dragStart);
-    task.addEventListener("dragend", dragEnd);
-});
-
-
-function dragStart() {
-    draggableTask = this;
-}
-
-function dragEnd () {
-    draggableTask = null;
-}
-
-
-columns.forEach((column) =>{
-    column.addEventListener('dragover', dragOver);
-    column.addEventListener('dragenter', dragEnter);
-    column.addEventListener('dragleave', dragLeave);
-    column.addEventListener('drop', dragDrop);
+tasks.forEach(task => {
+    task.addEventListener('dragstart', () => {
+      task.classList.add('dragging')
+    })
+  
+    task.addEventListener('dragend', () => {
+      task.classList.remove('dragging')
+    })
 })
+  
+columns.forEach(column => {
+      column.addEventListener('dragover', e => {
+      e.preventDefault()
+      const afterElement = getDragAfterElement(column, e.clientY)
+      const draggable = document.querySelector('.dragging')
+      if (afterElement == null) {
+        column.appendChild(draggable)
+      } else {
+        column.insertBefore(draggable, afterElement)
+      }
+    })
+})
+  
+function getDragAfterElement(column, y) {
 
-function dragOver(e) {
-    e.preventDefault();
-}
-
-function dragEnter() {
-    this.style.border = "2px solid #426f85";
-}
-
-function dragLeave() {
-    this.style.border = "none";
-}
-
-function dragDrop() {
-    this.style.border = "none";
-    this.appendChild(draggableTask);
+    const draggableElements = [...column.querySelectorAll('.tasks:not(.dragging)')]
+    return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect()
+      const offset = y - box.top - box.height / 2
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child }
+      } else {
+        return closest
+      }
+    }, { offset: Number.NEGATIVE_INFINITY }).element
 }
 
 //create new task
@@ -79,15 +73,11 @@ function createTask() {
         span.parentElement.style.display = "none";
       });
 
-    task_div.addEventListener("dragstart", dragStart);
-    task_div.addEventListener("dragend", dragEnd);
-
     task_div.appendChild(span);
     columnAdd.appendChild(task_div);
 
-    
 
-    /* local storage doesn't work properly */
+ /*     local storage doesn't work properly 
     const taskArray = [];
     tasks.forEach((task) => {
         taskArray.push({
@@ -96,7 +86,7 @@ function createTask() {
         })
     })
 
-    localStorage.setItem("taskArray",JSON.stringify(taskArray));
+    localStorage.setItem("taskArray",JSON.stringify(taskArray)); */
 
 }
 
