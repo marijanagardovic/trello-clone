@@ -1,6 +1,5 @@
 const tasks = document.querySelectorAll('.tasks');
 const columns = document.querySelectorAll('.columns');
-let draggableTask = null;
 const submit = document.querySelector('#task-submit');
 const columnAdd = document.querySelector('#column_add');
 const close_btns = document.querySelectorAll(".close");
