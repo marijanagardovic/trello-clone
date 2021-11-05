@@ -57,6 +57,7 @@ function createTask() {
     task_div.appendChild(txt);
 
     task_div.classList.add("tasks");
+    task_div.classList.add("dragging");
     task_div.setAttribute("draggable", "true");
 
     /*create span */
@@ -74,18 +75,6 @@ function createTask() {
 
     task_div.appendChild(span);
     columnAdd.appendChild(task_div);
-
-
- /*     local storage doesn't work properly 
-    const taskArray = [];
-    tasks.forEach((task) => {
-        taskArray.push({
-        name: "task",
-        column: "backlog"
-        })
-    })
-
-    localStorage.setItem("taskArray",JSON.stringify(taskArray)); */
 
 }
 
