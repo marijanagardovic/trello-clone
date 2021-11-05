@@ -121,7 +121,7 @@ input:focus {
 }
 
 .tasks.dragging {
-    opacity: 0.5;
+    color: var(--paragraph);
 }
 
 .close {
